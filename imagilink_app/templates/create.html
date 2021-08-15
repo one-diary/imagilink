@@ -1,0 +1,95 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block navbar %}
+<div class="nav">
+    <div class="nav-wrapper">
+        <div class="navbar-nav align-items-center"><a href="{% url 'imagilink_app:home' %}" class="navbar-brand btn-transparent rounded p-1 transition-all-1 mr-2"><img src="{% static 'img/logo.png' %}" height="30" class="d-inline-block" title="imagilink" alt="imagilink logo"><span class="h5 ml-2 mb-0 font-weight-bold align-middle">ImagiLink</span></a></div>
+        <div class="menu-right">
+         <div class="profile-btn">
+            <svg xmlns="http://www.w3.org/2000/svg"  height="22" width="22"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <circle cx="12" cy="7" r="4" />
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+           </svg>
+           <span></span>
+          </div>
+
+          <div class="profile-btn" onclick="window.location.href='{% url 'imagilink_app:saveimagedata' %}'">
+            <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <line x1="9" y1="12" x2="15" y2="12" />
+                <line x1="12" y1="9" x2="12" y2="15" />
+              </svg>
+           <span>Create</span>
+          </div>
+            <a class="btnsd" href="{% url 'imagilink_app:dashboard' %}" style=" color: #4b76f1;
+            border: 1px solid #4b76f1 ;">Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="container">
+   <form action="{% url 'imagilink_app:create' %}" method="post" id="create-form">
+      {% csrf_token %}
+      <div class="left-section">
+         <span class="labelo" id="title-text">Type Title</span>
+         {{ form.seo_title }}
+         <span  class="labelo"  id="description-text">Type Description here</span>
+         {{ form.seo_description }}
+         <span  class="labelo"  id="url-text">Type Target URL here</span>
+         {{ form.target_url }}
+         <span  class="labelo"  id="alias-text">Type Custom Alias here</span>
+        {{ form.custom_url }}
+        {% if errors %}
+        <div class="alert alert-danger" role="alert"></div>
+        {% endif %}
+      </div>
+      <div class="right-section">
+         <div class="ouput-preview d-flex justify-content-center align-items-start">
+            <div id="output-card" class="border mb-4">
+               <div class="border-bottom">
+                  <img src="{{ image_link }}" alt="#" id="card-image">
+               </div>
+               <div class="card-info">
+                  <div class="card-title">Title</div>
+                  <div class="card-description">Description</div>
+                  <div class="card-link">link</div>
+               </div>
+            </div>
+         </div>
+         <input type="hidden" name="seo_image" id="id_seo_image" value="{{ image_link }}" />
+         <input type="hidden" name="author" id="id_author" value="{{ author }}" />
+         <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-sub" id="btn-copy">
+               Submit 
+               <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M7 12l5 5l10 -10" />
+                  <path d="M2 12l5 5m5 -5l5 -5" />
+               </svg>
+            </button>
+         </div>
+      </div>
+   </form>
+</div>
+
+<script>
+//   JS eventlisteners for live preview of the SEO Card
+document.querySelector('#id_seo_title').onkeyup = function() {
+  document.querySelector(".card-title").innerHTML = document.querySelector("#id_seo_title").value;
+};
+
+document.querySelector('#id_seo_description').onkeyup = function() {
+  document.querySelector(".card-description").innerHTML = document.querySelector("#id_seo_description").value;
+};
+
+document.querySelector('#id_target_url').onkeyup = function() {
+  document.querySelector(".card-link").innerHTML = document.querySelector("#id_target_url").value;
+};
+</script>
+{% endblock content %}

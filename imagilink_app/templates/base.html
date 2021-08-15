@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImagiLink | Create CUSTOM OG Links</title>
+
+      <!-- Primary Meta Tags -->
+      <meta name="title" content="ImagiLink | Create CUSTOM OG Link">
+      <meta name="description" content="Imagilink is a tool through which you can use custom OG graph SEO Tags on any url, in simple words this can turn plain links into images and drive more attention.">
+      <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="{% static 'img/jgj.PNG' %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta property="og:title" content="ImagiLink | Create CUSTOM OG Link!">
+      <meta property="og:description" content="Imagilink is a tool through which you can use custom OG graph SEO Tags on any url, in simple words this can turn plain links into images and drive more attention.">
+      <meta property="og:image" content="{% static 'img/jgj.PNG' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+
+    <!-- ==== Navbar ==== -->
+    {% block navbar %}{% endblock navbar %}
+
+    <!-- === Main Content === -->
+    {% block content %}{% endblock content %}
+
+    <!-- === Footer === -->
+    <div class="footer">
+        <div class="footer-con">
+           <div class="s-links">
+              <span style="color: #fff;">© 2021 ImagiLink <div class="d-inline-block bg-white rounded mr-2">
+                <img src="{% static 'img/logo.png' %}" width="40px">
+             </div></span>
+              <a href="{% url 'imagilink_app:saveimagedata' %}">Try now!</a>
+           </div>
+           <div class="social">
+              <svg onclick="window.location.href= 'https://github.com/abhiprojectz/imagilink'" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                 <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+              </svg>
+           </div>
+        </div>
+     </div>
+</body>
+<!--Bootstrap scripts-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script>
+function getCookie(name) {
+	var cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i].trim();
+			if (cookie.substring(0, name.length + 1) == (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
+}
+
+function copy_link() {
+	var el = document.querySelector("#genlink");
+	var element = document.createElement("input");
+	document.querySelector("body").appendChild(element);
+	element.value = el.value;
+	element.select();
+	document.execCommand("copy");
+	element.remove();
+  swal("Link copied to clipboard!")
+}
+
+function u_popup() {
+    swal("Do you wanna logout?", {
+  buttons: {
+    cancel: "Cancel",
+    Logout: true,
+  },
+})
+.then((value) => {
+  switch (value) {
+ 
+    case "Logout":
+      window.location.href="{% url 'imagilink_app:logout' %}";
+      break;
+ 
+    default:
+      swal("You are safe!");
+  }
+});
+}
+</script>
+</html>

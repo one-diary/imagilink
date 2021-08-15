@@ -1,0 +1,78 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block navbar %}
+<div class="nav">
+    <div class="nav-wrapper">
+        <div class="navbar-nav align-items-center"><a href="{% url 'imagilink_app:home' %}" class="navbar-brand btn-transparent rounded p-1 transition-all-1 mr-2"><img src="{% static 'img/logo.png' %}" height="30" class="d-inline-block" title="imagilink" alt="imagilink logo"><span class="h5 ml-2 mb-0 font-weight-bold align-middle">ImagiLink</span></a></div>
+        <div class="menu-right">
+         <div class="profile-btn" onclick="u_popup()">
+            <svg xmlns="http://www.w3.org/2000/svg"  height="22" width="22"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <circle cx="12" cy="7" r="4" />
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+           </svg>
+           <span></span>
+          </div>
+
+          <div class="profile-btn" onclick="window.location.href='{% url 'imagilink_app:saveimagedata' %}'">
+            <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <line x1="9" y1="12" x2="15" y2="12" />
+                <line x1="12" y1="9" x2="12" y2="15" />
+              </svg>
+           <span>Create</span>
+          </div>
+            <a class="btnsd" href="{% url 'imagilink_app:dashboard' %}" style=" color: #4b76f1;
+            border: 1px solid #4b76f1 ;">Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock navbar %}
+
+{% block content %}
+<style>
+
+</style>
+<div class="parent-container">
+   <div class="circles">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+   </div>
+   <div class="main">
+      <div class="glass">
+         <div class="view-container">
+            <div>
+               <h1 class="tagline">
+               Here is your imagilink:</p>
+               <input type="text" class="text-input form-control form-control-md" value="{{ imagilink }}" placeholder="please copy it..." name="title" id="genlink">
+               <button type="submit" class="btn btn-lg text-light" id="btn-copy" onclick="copy_link()">
+                  Copy! 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                     <rect x="8" y="8" width="12" height="12" rx="2" />
+                     <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                  </svg>
+                  </i>
+               </button>
+            </div>
+            <div>
+               <div class="ouput-preview d-flex justify-content-center align-items-start">
+                  <div id="output-card" class="border mb-4">
+                     <div class="border-bottom">
+                        <img src="{{ image }}" alt="#" id="card-image">
+                     </div>
+                     <div class="card-info">
+                        <div class="card-title">{{ title }}</div>
+                        <div class="card-description">{{ description }} </div>
+                        <div class="card-link">{{ target_url }} </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}

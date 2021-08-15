@@ -1,0 +1,163 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block navbar %}
+<div class="nav">
+    <div class="nav-wrapper">
+        <div class="navbar-nav align-items-center"><a href="{% url 'imagilink_app:home' %}" class="navbar-brand btn-transparent rounded p-1 transition-all-1 mr-2"><img src="{% static 'img/logo.png' %}" height="30" class="d-inline-block" title="imagilink" alt="imagilink logo"><span class="h5 ml-2 mb-0 font-weight-bold align-middle">ImagiLink</span></a></div>
+        <div class="menu-right">
+
+            {% if user.is_authenticated %}
+            <div class="profile-btn" onclick="u_popup()">
+                <svg xmlns="http://www.w3.org/2000/svg"  height="22" width="22"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+               </svg>
+               <span></span>
+              </div>
+
+              <div class="profile-btn" onclick="window.location.href='{% url 'imagilink_app:saveimagedata' %}'">
+                <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <line x1="9" y1="12" x2="15" y2="12" />
+                    <line x1="12" y1="9" x2="12" y2="15" />
+                  </svg>
+               <span>Create</span>
+              </div>
+              {% endif %}
+            <a class="btnsd" href="{% url 'imagilink_app:dashboard' %}" style=" color: #4b76f1;
+            border: 1px solid #4b76f1 ;">Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock navbar %}
+
+
+{% block content %}
+<div style="margin-top: 56px;">
+    <div class="" style="
+    background: url('{% static 'img/bg-home.svg' %}');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    ">
+    <div class="">
+       <div class="row py-5" style="--bs-gutter-x: 0; --bs-gutter-y: 0;">
+          <div class="offset-lg-1 col-lg-10 text-center">
+             <h1 class="disp mt-lg-5">
+                Improve your chances <br class="d-none d-md-inline-block"> of getting Noticed!
+             </h1>
+             <p class="mt-5 font-size-18 textgr">
+                Despite having the good talent, you may not be able to get noticed in this social media world.
+                <br>
+                But With Imagilink you may create CUSTOM OG Graph links within seconds, and <br> as a creator may <b>drive more audience</b> to your website!
+             </p>
+             <div class="my-5">
+                <div>
+                   <a class="btn btn-primary btn-lg px-4" href="{% url 'imagilink_app:dashboard' %}">
+                   Let's gain more audience
+                   </a>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <div class="container-fluid py-5 bg-light-bg-blue">
+    <div class="containerex py-5 px-0 px-lg-5">
+       <div class="h2 disp2 text-center">
+          What's unique about Imagilink?
+       </div>
+       <div class="row my-4 pt-5">
+          <div class="col-md-4 px-4 text-center text-md-left">
+             <svg xmlns="http://www.w3.org/2000/svg" class="mt-4 mt-md-0" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                 <path d="M6 17.6l-2 -1.1v-2.5" />
+                 <path d="M4 10v-2.5l2 -1.1" />
+                 <path d="M10 4.1l2 -1.1l2 1.1" />
+                 <path d="M18 6.4l2 1.1v2.5" />
+                 <path d="M20 14v2.5l-2 1.12" />
+                 <path d="M14 19.9l-2 1.1l-2 -1.1" />
+                 <line x1="12" y1="12" x2="14" y2="10.9" />
+                 <line x1="18" y1="8.6" x2="20" y2="7.5" />
+                 <line x1="12" y1="12" x2="12" y2="14.5" />
+                 <line x1="12" y1="18.5" x2="12" y2="21" />
+                 <path d="M12 12l-2 -1.12" />
+                 <line x1="6" y1="8.6" x2="4" y2="7.5" />
+               </svg>
+             <div class="my-3"><b>Complete flexibility</b></div>
+             <p class="text-custom-body">
+                Any old URL Shortener or docs , ppts research papers , assignments etc doesn't provide you the ability to customize your links, with this tool you can do this.
+             </p>
+          </div>
+          <div class="col-md-4 px-4 text-center text-md-left">
+             <svg xmlns="http://www.w3.org/2000/svg" class="mt-4 mt-md-0" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                 <circle cx="12" cy="12" r="9" />
+                 <line x1="3.6" y1="15" x2="14.15" y2="15" />
+                 <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(72 12 12)" />
+                 <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(144 12 12)" />
+                 <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(216 12 12)" />
+                 <line x1="3.6" y1="15" x2="14.15" y2="15" transform="rotate(288 12 12)" />
+               </svg>
+             <div class="my-3"><b>Make Links look beautifull</b></div>
+             <p class="text-custom-body">
+                There are thousand of links shared on social media every second, and its very difficult to get noticed. But with custom image links you may customize your appearnce and make users visits you!
+             </p>
+          </div>
+          <div class="col-md-4 px-4 text-center text-md-left">
+             <svg xmlns="http://www.w3.org/2000/svg" class="mt-4 mt-md-0" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                 <line x1="12" y1="12" x2="12" y2="12.01" />
+                 <path d="M12 2a4 10 0 0 0 -4 10a4 10 0 0 0 4 10a4 10 0 0 0 4 -10a4 10 0 0 0 -4 -10" transform="rotate(45 12 12)" />
+                 <path d="M12 2a4 10 0 0 0 -4 10a4 10 0 0 0 4 10a4 10 0 0 0 4 -10a4 10 0 0 0 -4 -10" transform="rotate(-45 12 12)" />
+               </svg>
+             <div class="my-3"><b>No simple links anymore!</b></div>
+             <p class="text-custom-body">
+                As a creator links are your daily friends, so let them express your talents.
+                Forget using old BitLY Url shorteners.
+             </p>
+          </div>
+       </div>
+       <div class="mt-5 text-center">
+          <div class="h3">Ready to get started?</div>
+          <div>Make a Customizable link.</div>
+          <div class="mt-4">
+             <a class="btn btn-primary btn-lg px-4" href="{% url 'imagilink_app:saveimagedata' %}">
+             Yes I'm in! 💪
+             </a>
+          </div>
+       </div>
+    </div>
+ </div>
+ <style>
+    .bgimg {
+       border-radius: 15px;
+       width: 90%;
+    }
+
+    .cmz {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+    }
+ </style>
+ <div class="containerex py-5 px-0 px-lg-5">
+   <div class="row cmz">
+      <div class="h2 text-center mb-5">
+         Save time with Built-In Dashboard! <br> Grow your Career with this tool!
+     </div>
+
+       <img class="bgimg" src="{% static 'img/ide2.PNG' %}" alt="">
+       <div class="text-center mb-5">
+         <p style="color: #4e5867; font-weight: 700;">This is how you can convert simple plain links <br> to a attractive Image link.</p>
+      </div>
+   </div>
+  </div>
+</div>
+
+{% endblock content %}
+

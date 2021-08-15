@@ -1,0 +1,193 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block navbar %}
+<div class="nav">
+   <div class="nav-wrapper">
+      <div class="navbar-nav align-items-center"><a href="{% url 'imagilink_app:home' %}" class="navbar-brand btn-transparent rounded p-1 transition-all-1 mr-2"><img src="{% static 'img/logo.png' %}" height="30" class="d-inline-block" title="imagilink" alt="imagilink logo"><span class="h5 ml-2 mb-0 font-weight-bold align-middle">ImagiLink</span></a></div>
+      <div class="menu-right">
+        <div class="profile-btn" onclick="u_popup()">
+          <svg xmlns="http://www.w3.org/2000/svg"  height="22" width="22"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <circle cx="12" cy="7" r="4" />
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+         </svg>
+         <span></span>
+        </div>
+
+        <div class="profile-btn" onclick="window.location.href='{% url 'imagilink_app:saveimagedata' %}'">
+          <svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+              <line x1="9" y1="12" x2="15" y2="12" />
+              <line x1="12" y1="9" x2="12" y2="15" />
+            </svg>
+         <span>Create</span>
+        </div>
+      </div>
+   </div>
+</div>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="flex-mini">
+   <div class="flex-wrapp">
+      <div>
+         <h4>
+         Toggle View</h3>
+      </div>
+      <div class="dropdown float-right">
+         <div style="font-size: 13px;
+         color: grey;">
+            <label class="switch">
+            <input id="switchz" onchange="update_view()" type="checkbox">
+            <span class="slider"></span>
+            </label> Swap to Table/Grid view
+         </div>
+      </div>
+   </div>
+</div>
+<section id="grid-view">
+   <div class="main-container">
+      <ul class="grid-wrapper">
+         {% for link in links %}
+         <li>
+            <div class="link-container">
+               <div class="image-wrapper">
+                  <img class="link-pre" src="{{ link.seo_image }}" alt="">
+               </div>
+               <div class="info-container">
+                  <div class="l-title">{{ link.seo_title }} </div>
+                  <div class="tm">{{ link.seo_description }} </div>
+                  <div class="tm"><b>Target URL:</b> <a href="{{ link.target_url }}">{{ link.target_url }}</a></div>
+                  <div class="tm" style="display: flex; align-items: center; justify-content: space-between;">
+                     <b>Imagilink:</b> <a href="{{ link.short_url }}">{{ link.short_url }}</a> 
+                     <svg xmlns="http://www.w3.org/2000/svg" class="del-btn" onclick="delete_link('{{ link.short_url }}')"  width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fd0061" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <rect x="4" y="4" width="16" height="16" rx="2" />
+                        <path d="M10 10l4 4m0 -4l-4 4" />
+                     </svg>
+                  </div>
+               </div>
+            </div>
+         </li>
+         {% endfor %}
+      </ul>
+   </div>
+</section>
+<div id="table-view" class="dash-container">
+   <div class="dash-wrapper">
+      <table class="table table-hover">
+         <thead class="theadzx-inverse">
+            <tr>
+               <th>Title</th>
+               <th>Description</th>
+               <th>Target URL</th>
+               <th>ImagiLink</th>
+               <th>Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for link in links %}
+            <tr>
+               <th scope="row">{{ link.seo_title }}</th>
+               <td>{{ link.seo_description }}</td>
+               <td><a href="{{ link.target_url }}">{{ link.target_url }}</a></td>
+               <td><a href="{{ link.short_url }}">{{ link.short_url }}</a></td>
+               <td>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="del-btn" onclick="delete_link('{{ link.short_url }}')"  width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fd0061" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                     <rect x="4" y="4" width="16" height="16" rx="2" />
+                     <path d="M10 10l4 4m0 -4l-4 4" />
+                  </svg>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+</div>
+<div class="flex-mini">
+   <div class="flex-wrapp">
+      <div>
+         <h4>
+         Dashboard</h3>
+      </div>
+      <div class="dropdown float-right">
+         <button onclick='window.location.href="{% url 'imagilink_app:saveimagedata' %}"' type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm">
+         + Create
+         </button>
+      </div>
+   </div>
+</div>
+<script>
+   function copy() {
+   	var el = document.querySelector("#");
+   	var element = document.createElement("input");
+   	document.querySelector("body").appendChild(element);
+   	element.value = el.textContent;
+   	element.select();
+   	document.execCommand("copy");
+   	element.remove();
+   }
+   
+   
+   function delete_link(link) {
+     swal({
+     title: "Are you sure?",
+     text: "Once deleted, you will not be able to recover this action.",
+     icon: "warning",
+     buttons: true,
+     dangerMode: true,
+   })
+   .then((willDelete) => {
+     if (willDelete) {
+   
+       fetch("{% url 'imagilink_app:delete' %}", {
+   			method: 'POST',
+   			headers: {
+   				'Content-Type': 'application/json',
+   				"X-CSRFToken": getCookie("csrftoken"),
+   			},
+   			body: JSON.stringify({
+   				link: link
+   			}),
+   		})
+   		.then(response => response.text())
+   		.then(data => {
+         swal("Your link has been deleted!", {
+         icon: "success",
+       });
+       window.location.href = window.location.href;
+   		})
+   		.catch((error) => {
+   			toast(error);
+   		});
+       
+     } else {
+       swal("Link is not deleted.");
+     }
+   });
+   }
+   
+   
+   function update_view() {
+     console.log("hh")
+     var switchz = document.querySelector("#switchz");
+     var table = document.querySelector("#table-view");
+     var gridv = document.querySelector("#grid-view");
+   
+     if (switchz.checked) {
+       table.style.display = 'block';
+       gridv.style.display = 'none';
+   
+   
+     } else {
+       table.style.display = 'none';
+       gridv.style.display = 'block';
+     }
+   }
+</script>
+{% endblock content %}

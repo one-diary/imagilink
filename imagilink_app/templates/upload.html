@@ -1,0 +1,78 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block navbar %}
+<div class="nav">
+    <div class="nav-wrapper">
+        <div class="navbar-nav align-items-center"><a href="{% url 'imagilink_app:home' %}" class="navbar-brand btn-transparent rounded p-1 transition-all-1 mr-2"><img src="{% static 'img/logo.png' %}" height="30" class="d-inline-block" title="imagilink" alt="imagilink logo"><span class="h5 ml-2 mb-0 font-weight-bold align-middle">ImagiLink</span></a></div>
+        <div class="menu-right">
+            <div class="profile-btn" onclick="u_popup()">
+                <svg xmlns="http://www.w3.org/2000/svg"  height="22" width="22"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#4b76f1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+               </svg>
+               <span></span>
+              </div>
+            <a class="btnsd" href="{% url 'imagilink_app:dashboard' %}" style=" color: #4b76f1;
+            border: 1px solid #4b76f1 ;">Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="parent-container">
+	<div class="circles">
+		<div class="circle1"></div>
+		<div class="circle2"></div>
+	</div>
+	<div class="main">
+		<div class="glass">
+			<div class="upload_form">
+				<input class="" id="file" accept="image/*" name="image" type="file">
+				<p>Drag your Image here or click in this area.</p>
+				<button type="submit">Upload the Image</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+const input = document.getElementById('file');
+const upload = (file) => {
+
+const formData = new FormData();
+
+formData.append('file',file);
+
+const options = {
+  method: 'POST',
+  body: formData,
+  headers: {
+	"X-CSRFToken": getCookie("csrftoken"),
+  },
+};
+
+fetch("{% url 'imagilink_app:saveimagedata' %}", options)
+.then(response => response.text())
+		.then(data => {
+			console.log(data)
+			var url = JSON.parse(data);
+			window.location.href = "{% url 'imagilink_app:create' %}" + "?img=" + url.fileurl;
+		})
+		.catch((error) => {
+			swal(error)
+		});
+};
+
+// Event handler executed when a file is selected
+const onSelectFile = () => upload(input.files[0]);
+
+// Add a listener on your input
+// It will be triggered when a file will be selected
+input.addEventListener('change', onSelectFile, false);
+</script>
+{% endblock content %}
