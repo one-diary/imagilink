@@ -3,4 +3,3 @@ Django==3.2.4
 django_heroku==0.3.1
 python-dotenv==0.19.0
 gunicorn
-django-heroku
