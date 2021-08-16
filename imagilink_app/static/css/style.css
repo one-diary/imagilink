@@ -605,3 +605,43 @@ thead th {
 .del-btn:hover {
 	transform: scale(1.1);
 }
+
+@media (max-width: 650px) {
+	#create-form {
+		flex-direction: column;
+	}
+
+	.right-section {
+		width: 90%;
+	}
+
+	.left-section {
+		width: 95%;
+	}
+
+	.view-container {
+		flex-direction: column;
+	}
+
+	.main {
+		margin-top: 140px;
+	}
+
+	.glass {
+		height: 80vh;
+		margin-top: -140px;
+	}
+
+	.upload_form {
+		margin-left: -200px;
+		width: 400px;
+	}
+
+	.upload_form button  {
+		width: 400px;
+	}
+
+	.logo_tile_main {
+		display: none;
+	}
+}
