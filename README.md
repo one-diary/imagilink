@@ -49,10 +49,6 @@ With the tool's dashboard you can customize them easily.
 + HTML/CSS
 
 
-# Future plans
-
-Integrating a authentication system and, building a full featured APIs.
-
 # Contributing 
 
 Star the project if , it helps.
